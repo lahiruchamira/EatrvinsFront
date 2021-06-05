@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Product } from 'src/app/Models/Product.model';
 import { productService } from 'src/app/service/product.service';
 
 @Component({
@@ -10,8 +11,10 @@ import { productService } from 'src/app/service/product.service';
 })
 export class ProductEditComponent implements OnInit {
   id:number;
+  guid: string;
   editMode=false;
   ProductForm:FormGroup;
+  tagsS:string[]=[];
   constructor(private route:ActivatedRoute,
     private productService:productService) { }
 
@@ -35,11 +38,25 @@ export class ProductEditComponent implements OnInit {
     );
   }
   onSubmit(){
-    if(this,this.editMode){
-      this.productService.updateProduct(this.id,this.ProductForm.value);
+    const tags=this.ProductForm.value.tags;
+      for(let tag of tags)
+      {
+        this.tagsS.push(tag.name);
+      }
+    const newProduct=new Product(
+      '',
+      this.ProductForm.value['name'],
+      this.ProductForm.value['image'],
+      this.ProductForm.value['price'],
+      this.ProductForm.value['description'],
+      this.tagsS
+    )
+    if(this.editMode){
+      newProduct.id=this.guid;
+      this.productService.updateProduct(this.id,newProduct);
     }
     else{
-      this.productService.addProduct(this.ProductForm.value);
+      this.productService.addProduct(newProduct);
     }
   console.log(this.ProductForm);
   }
@@ -56,6 +73,7 @@ export class ProductEditComponent implements OnInit {
       productImage=product.image;
       productPrice=product.price;
       productDiscription=product.description;
+      this.guid=product.id;
       if(product.tags){
         for(let tag of product.tags){
           productTags.push(
