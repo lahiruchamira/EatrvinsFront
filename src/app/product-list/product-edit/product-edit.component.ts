@@ -78,7 +78,7 @@ export class ProductEditComponent implements OnInit {
         for(let tag of product.tags){
           productTags.push(
             new FormGroup({
-              'name':new FormControl(tag,Validators.required)
+              'name':new FormControl(tag)
             })
           )
         }
@@ -88,9 +88,9 @@ export class ProductEditComponent implements OnInit {
 
     this.ProductForm=new FormGroup({
       'name': new FormControl(productName,Validators.required),
-      'image':new FormControl(productImage,Validators.required),
-      'price':new FormControl(productPrice,Validators.required),
-      'description':new FormControl(productDiscription,Validators.required),
+      'image':new FormControl(productImage),
+      'price':new FormControl(productPrice,[Validators.required,Validators.pattern(/^[1-9]+[0-9]*$/)]),
+      'description':new FormControl(productDiscription),
       'tags': productTags
     });
   }
