@@ -23,5 +23,8 @@ export class ProductDetailComponent implements OnInit {
       }
     )
   }
+  onEditProduct(){
+    this.router.navigate(['edit'],{relativeTo:this.route});
+  }
 
 }

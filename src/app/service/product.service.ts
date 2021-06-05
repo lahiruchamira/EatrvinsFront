@@ -1,9 +1,12 @@
 import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 import { Product } from "../Models/Product.model";
+import { ProductEditComponent } from "../product-list/product-edit/product-edit.component";
 
 @Injectable()
 export class productService{
-    private product:Product[]=[
+    productChanged=new Subject<Product[]>();
+    private products:Product[]=[
         new Product('60ba1fe7f7517286b4883a7a',
         'Product1',
         5674.00,
@@ -19,10 +22,18 @@ export class productService{
     ]
 
     getProducts(){
-    return this.product.slice();
+    return this.products.slice();
     }
     getProduct(index:number){
-        return this.product[index];
+        return this.products[index];
+    }
+    addProduct(product:Product){
+        this.products.push(product);
+        this.productChanged.next(this.products.slice())
+    }
+    updateProduct(index:number, product:Product){
+        this.products[index]=product;
+        this.productChanged.next(this.products.slice())
     }
 
 }

@@ -11,6 +11,8 @@ import { ProductDetailComponent } from './product-list/product-detail/product-de
 import { ProductComponent } from './product/product.component';
 import { ProductStartComponent } from './product/product-start/product-start.component';
 import { DropdownDirective } from './header/dropdown.directive';
+import { ProductEditComponent } from './product-list/product-edit/product-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,11 +23,13 @@ import { DropdownDirective } from './header/dropdown.directive';
     ProductDetailComponent,
     ProductComponent,
     ProductStartComponent,
-    DropdownDirective
+    DropdownDirective,
+    ProductEditComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [productService],
   bootstrap: [AppComponent]
