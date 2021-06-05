@@ -13,6 +13,8 @@ import { ProductStartComponent } from './product/product-start/product-start.com
 import { DropdownDirective } from './header/dropdown.directive';
 import { ProductEditComponent } from './product-list/product-edit/product-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DataService } from './service/data.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,13 +27,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProductStartComponent,
     DropdownDirective,
     ProductEditComponent
+    
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [productService],
+  providers: [productService,DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { Product } from "../Models/Product.model";
 import { ProductEditComponent } from "../product-list/product-edit/product-edit.component";
+import { DataService } from "./data.service";
 
 @Injectable()
 export class productService{
@@ -20,9 +21,21 @@ export class productService{
         'https://cdn.shopify.com/s/files/1/0757/9123/products/linjer-minimalist-watch-38-gunmetal-tan-1-front_540x.jpg?v=1573730028',
         ['watch'])
     ]
+    constructor(private service:DataService){
 
-    getProducts(){
-    return this.products.slice();
+    }
+
+    async getProducts(){
+    //return this.products.slice();
+     await this.service
+      .GetProducts()
+      .then((data) => {
+        this.products = data;
+      })
+      .catch((error) => {
+        
+      });
+      return this.products; 
     }
     getProduct(index:number){
         return this.products[index];

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Product } from '../Models/Product.model';
 import { productService } from '../service/product.service';
 
@@ -15,14 +16,14 @@ export class ProductListComponent implements OnInit {
     private router:Router,
     private route:ActivatedRoute ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.productService.productChanged
     .subscribe(
       (products:Product[])=>{
         this.products=products;
       }
     );
-    this.products=this.productService.getProducts();
+   this.products= await this.productService.getProducts();
 
   }
   onNewProduct(){
