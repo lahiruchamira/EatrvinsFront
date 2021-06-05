@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Product } from 'src/app/Models/Product.model';
 import { productService } from 'src/app/service/product.service';
 
@@ -16,7 +16,8 @@ export class ProductEditComponent implements OnInit {
   ProductForm:FormGroup;
   tagsS:string[]=[];
   constructor(private route:ActivatedRoute,
-    private productService:productService) { }
+    private productService:productService,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -58,7 +59,8 @@ export class ProductEditComponent implements OnInit {
     else{
       this.productService.addProduct(newProduct);
     }
-  console.log(this.ProductForm);
+    this.router.navigate([''],{relativeTo:this.route});
+
   }
   private initForm(){
     let productName='';
@@ -89,9 +91,10 @@ export class ProductEditComponent implements OnInit {
     this.ProductForm=new FormGroup({
       'name': new FormControl(productName,Validators.required),
       'image':new FormControl(productImage),
-      'price':new FormControl(productPrice,[Validators.required,Validators.pattern(/^[1-9]+[0-9]*$/)]),
+      'price':new FormControl(productPrice,[Validators.required,Validators.pattern(/^[0-9]*$/)]),
       'description':new FormControl(productDiscription),
       'tags': productTags
+      
     });
   }
 

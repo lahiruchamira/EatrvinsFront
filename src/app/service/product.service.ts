@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
+import { messagetype } from "src/enum";
+import { Events } from "../events";
 import { Product } from "../Models/Product.model";
-import { ProductEditComponent } from "../product-list/product-edit/product-edit.component";
 import { DataService } from "./data.service";
 
 @Injectable()
@@ -21,7 +22,8 @@ export class productService{
         'https://cdn.shopify.com/s/files/1/0757/9123/products/linjer-minimalist-watch-38-gunmetal-tan-1-front_540x.jpg?v=1573730028',
         ['watch'])
     ]
-    constructor(private service:DataService){
+    constructor(private service:DataService,
+        private event:Events){
 
     }
 
@@ -45,7 +47,11 @@ export class productService{
         await this.service
         .AddProduct(product)
         .then((data) => {
-          
+            this.event.message.next({
+                type: data.message ? messagetype.warn : messagetype.success,
+                title: data.message ? 'Error' : 'Saved',
+                meg: data.message ?? 'Succesfuly saved',
+              });
         })
         .catch((error) => {
           

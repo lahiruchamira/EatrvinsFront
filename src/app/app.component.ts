@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NotificationAnimationType, NotificationsService } from 'angular2-notifications';
 import { messagetype } from 'src/enum';
+import { Events } from './events';
 import { message } from './Models/Product.model';
 
 @Component({
@@ -11,8 +12,16 @@ import { message } from './Models/Product.model';
 export class AppComponent {
   title = 'eatirvinsFront';
 
-  constructor(private notifyService: NotificationsService){
-    
+  constructor(private notifyService: NotificationsService,
+    private event: Events){
+    this.event.message.subscribe(
+      (res) => {
+        this.message(res);
+      },
+      (err) => {
+        this.messageError();
+      }
+    )
   }
 
   messageError() {
@@ -51,5 +60,8 @@ export class AppComponent {
     if (mesg.type == messagetype.warn) {
       this.notifyService.warn(mesg.title, mesg.meg, option);
     }
-  }
+    if (mesg.type == messagetype.info) {
+      this.notifyService.info(mesg.title, mesg.meg, option);
+    }
+  } 
 }
