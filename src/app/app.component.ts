@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { NotificationAnimationType, NotificationsService } from 'angular2-notifications';
+import { messagetype } from 'src/enum';
+import { message } from './Models/Product.model';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,46 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'eatirvinsFront';
+
+  constructor(private notifyService: NotificationsService){
+    
+  }
+
+  messageError() {
+    this.notifyService.error(
+      'Error!',
+      ' Please contact your Administrator... ',
+      {
+        timeOut: 3000,
+        position: ['top', 'right'],
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: false,
+        clickIconToClose: true,
+      }
+    );
+  }
+
+  message(mesg: message) {
+     let option ={
+      timeOut: 3000,
+      showProgressBar: true,
+      animation:NotificationAnimationType.FromRight,
+      pauseOnHover: true,
+      clickToClose: false,
+      clickIconToClose: true,
+    };
+    if (mesg.type == messagetype.alert) {
+      this.notifyService.alert(mesg.title, mesg.meg,option );
+    }
+    if (mesg.type == messagetype.error) {
+      this.notifyService.error(mesg.title, mesg.meg,option);
+    }
+    if (mesg.type == messagetype.success) {
+      this.notifyService.success(mesg.title, mesg.meg, option);
+    }
+    if (mesg.type == messagetype.warn) {
+      this.notifyService.warn(mesg.title, mesg.meg, option);
+    }
+  }
 }

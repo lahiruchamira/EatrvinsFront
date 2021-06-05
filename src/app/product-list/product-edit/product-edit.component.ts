@@ -46,13 +46,13 @@ export class ProductEditComponent implements OnInit {
     const newProduct=new Product(
       '',
       this.ProductForm.value['name'],
-      this.ProductForm.value['image'],
       this.ProductForm.value['price'],
       this.ProductForm.value['description'],
+      this.ProductForm.value['image'],
       this.tagsS
     )
     if(this.editMode){
-      newProduct.id=this.guid;
+      newProduct._id=this.guid;
       this.productService.updateProduct(this.id,newProduct);
     }
     else{
@@ -73,7 +73,7 @@ export class ProductEditComponent implements OnInit {
       productImage=product.image;
       productPrice=product.price;
       productDiscription=product.description;
-      this.guid=product.id;
+      this.guid=product._id;
       if(product.tags){
         for(let tag of product.tags){
           productTags.push(

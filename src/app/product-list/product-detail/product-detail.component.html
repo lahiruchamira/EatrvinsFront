@@ -16,6 +16,11 @@
      </div>
  </div>
  <div class="row">
+    <div class="col-xs-12">
+        <p>You pay S$ {{product.price}}</p>
+    </div>
+</div>
+ <div class="row">
      <div class="col-xs-12">
          <ul class="list-group">
              <li class="list-group-item"
@@ -30,6 +35,6 @@
  <div class="row">
     <div class="col-xs-12">
         <button type="button" class="btn btn-secondary" (click)="onEditProduct()">Edit</button>
-        <button type="button" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn btn-danger" (click)="onDeleteProduct()">Delete</button>
     </div>
 </div>

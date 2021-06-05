@@ -15,6 +15,7 @@ import { ProductEditComponent } from './product-list/product-edit/product-edit.c
 import { ReactiveFormsModule } from '@angular/forms';
 import { DataService } from './service/data.service';
 import { HttpClientModule } from '@angular/common/http';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 @NgModule({
   declarations: [
@@ -26,14 +27,14 @@ import { HttpClientModule } from '@angular/common/http';
     ProductComponent,
     ProductStartComponent,
     DropdownDirective,
-    ProductEditComponent
-    
+    ProductEditComponent   
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SimpleNotificationsModule.forRoot({position:['top', 'right']}),
   ],
   providers: [productService,DataService],
   bootstrap: [AppComponent]

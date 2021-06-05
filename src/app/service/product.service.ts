@@ -40,13 +40,40 @@ export class productService{
     getProduct(index:number){
         return this.products[index];
     }
-    addProduct(product:Product){
-        this.products.push(product);
-        this.productChanged.next(this.products.slice())
+    async addProduct(product:Product){
+        //this.products.push(product);
+        await this.service
+        .AddProduct(product)
+        .then((data) => {
+          
+        })
+        .catch((error) => {
+          
+        });
+         this.productChanged.next(await this.getProducts())
     }
-    updateProduct(index:number, product:Product){
-        this.products[index]=product;
-        this.productChanged.next(this.products.slice())
+    async updateProduct(index:number, product:Product){
+        //this.products[index]=product;
+        await this.service
+        .UpdateProduct(product)
+        .then((data) => {
+          
+        })
+        .catch((error) => {
+          
+        });
+        this.productChanged.next(await this.getProducts())
+    }
+    async deleteProduct(product:Product){
+        await this.service
+        .deleteProduct(product)
+        .then((data) => {
+          
+        })
+        .catch((error) => {
+          
+        });
+        this.productChanged.next(await this.getProducts())
     }
 
 }
