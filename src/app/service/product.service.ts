@@ -21,5 +21,8 @@ export class productService{
     getProducts(){
     return this.product.slice();
     }
+    getProduct(index:number){
+        return this.product[index];
+    }
 
 }

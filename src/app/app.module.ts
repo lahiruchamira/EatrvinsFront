@@ -10,6 +10,7 @@ import { ProductItemComponent } from './product-list/product-item/product-item.c
 import { ProductDetailComponent } from './product-list/product-detail/product-detail.component';
 import { ProductComponent } from './product/product.component';
 import { ProductStartComponent } from './product/product-start/product-start.component';
+import { DropdownDirective } from './header/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ProductStartComponent } from './product/product-start/product-start.com
     ProductItemComponent,
     ProductDetailComponent,
     ProductComponent,
-    ProductStartComponent
+    ProductStartComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
