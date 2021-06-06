@@ -50,7 +50,7 @@ export class productService{
             this.event.message.next({
                 type: data.message ? messagetype.warn : messagetype.success,
                 title: data.message ? 'Error' : 'Saved',
-                meg: data.message ?? 'Succesfuly saved',
+                meg: data.message ?? 'Successfully saved',
               });
         })
         .catch((error) => {
@@ -65,8 +65,8 @@ export class productService{
         .then((data) => {
             this.event.message.next({
                 type: data.message ? messagetype.warn : messagetype.success,
-                title: data.message ? 'Error' : 'Saved',
-                meg: data.message ?? 'Updated Succesfuly',
+                title: data.message ? 'Error' : 'Update',
+                meg: data.message ?? 'Updated Successfully',
               });
         })
         .catch((error) => {
@@ -79,9 +79,9 @@ export class productService{
         .deleteProduct(product)
         .then((data) => {
             this.event.message.next({
-                type: messagetype.success,
-                title: data.message ? 'Error' : 'Saved',
-                meg: data.message ?? data.message,
+                type: messagetype.info,
+                title: data.id ? 'Delete' : 'Error',
+                meg: data.id ?? "Updated Successfully",
               });
         })
         .catch((error) => {

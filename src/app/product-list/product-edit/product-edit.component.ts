@@ -91,7 +91,7 @@ export class ProductEditComponent implements OnInit {
     this.ProductForm=new FormGroup({
       'name': new FormControl(productName,Validators.required),
       'image':new FormControl(productImage),
-      'price':new FormControl(productPrice,[Validators.required,Validators.pattern(/^[0-9]*$/)]),
+      'price':new FormControl(productPrice,[Validators.required,Validators.pattern(/^[1-9]+[0-9]*$/)]),
       'description':new FormControl(productDiscription),
       'tags': productTags
       
