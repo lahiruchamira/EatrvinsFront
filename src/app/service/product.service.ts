@@ -63,7 +63,11 @@ export class productService{
         await this.service
         .UpdateProduct(product)
         .then((data) => {
-          
+            this.event.message.next({
+                type: data.message ? messagetype.warn : messagetype.success,
+                title: data.message ? 'Error' : 'Saved',
+                meg: data.message ?? 'Updated Succesfuly',
+              });
         })
         .catch((error) => {
           
@@ -74,7 +78,11 @@ export class productService{
         await this.service
         .deleteProduct(product)
         .then((data) => {
-          
+            this.event.message.next({
+                type: messagetype.success,
+                title: data.message ? 'Error' : 'Saved',
+                meg: data.message ?? data.message,
+              });
         })
         .catch((error) => {
           
