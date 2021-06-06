@@ -38,6 +38,9 @@ export class ProductEditComponent implements OnInit {
       })
     );
   }
+  onCancel(){
+    this.ProductForm.reset();
+  }
   onSubmit(){
     const tags=this.ProductForm.value.tags;
       for(let tag of tags)
